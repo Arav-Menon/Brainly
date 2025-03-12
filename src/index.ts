@@ -5,6 +5,9 @@ const app = express();
 
 app.use(express.json());
 
+
+app.use("/api/v1/user", userRouter)
+
 const main = async () => {
 
     try {
@@ -24,5 +27,3 @@ const main = async () => {
 }
 
 main()
-
-app.use("api/v1/user", userRouter)
