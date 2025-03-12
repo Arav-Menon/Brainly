@@ -1,4 +1,4 @@
-import mongoose, { mongo, Types } from 'mongoose';
+import mongoose, { Types } from 'mongoose';
 
 const Schema = mongoose.Schema;
 
@@ -34,4 +34,4 @@ const ContentModel = mongoose.model("Content", ContentSchema);
 // const TagsModel = mongoose.model("Tags", TagsSchema);
 // const LinkModel = mongoose.model("Link", LinkSchema);
 
-export { UserModel };
+export { UserModel, ContentModel };

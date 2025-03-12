@@ -1,12 +1,14 @@
 import express from 'express'; 
 import { userRouter } from './Routes/user';
-import mongoose, { mongo } from 'mongoose';
+import mongoose from 'mongoose';
+import { contentRouter } from './Routes/createContent'; 
 const app = express();
 
 app.use(express.json());
 
 
-app.use("/api/v1/user", userRouter)
+app.use("/api/v1/user", userRouter);
+app.use("/api/v1/content", contentRouter);
 
 const main = async () => {
 

@@ -17,7 +17,7 @@ userRouter.post("/signup", async (req, res) => {
 
     const token = jwt.sign(
       {
-        userId: newUser._id,
+        id: newUser._id,
       },
       process.env.JWT_USER_PASSWORD || "default_secret"
     );
@@ -43,7 +43,7 @@ userRouter.post("/signin", async (req, res) => {
     if (foundUser) {
       const token = jwt.sign(
         {
-          userId: foundUser._id,
+          id: foundUser._id,
         },
         process.env.JWT_USER_PASSWORD || "default_secret"
       );
@@ -63,30 +63,30 @@ userRouter.post("/signin", async (req, res) => {
   }
 });
 
-// userRouter.put("/update-profile", async (req: Request, res: Response) => {
-//     try {
-//       const { email, password } = req.body;
+userRouter.put("/update-profile", async (req: Request, res: Response) => {
+    try {
+      const { email, password } = req.body;
   
-//       if (!email || !password) {
-//         return res.status(400).json({ message: "Email and password are required" });
-//       }
+      if (!email || !password) {
+         res.status(400).json({ message: "Email and password are required" });
+      }
   
-//       const updateProfile = await UserModel.findOneAndUpdate(
-//         { email },
-//         { password },
-//         { new: true }
-//       );
+      const updateProfile = await UserModel.findOneAndUpdate(
+        { email },
+        { password },
+        { new: true }
+      );
   
-//       if (!updateProfile) {
-//         return res.status(404).json({ message: "User not found" });
-//       }
+      if (!updateProfile) {
+        res.status(404).json({ message: "User not found" });
+      }
   
-//       return res.status(200).json({ message: "Profile updated successfully", updateProfile });
-//     } catch (error) {
-//       console.error(error);
-//       return res.status(500).json({ error: "Something went wrong" });
-//     }
-//   });
+       res.status(200).json({ message: "Profile updated successfully", updateProfile });
+    } catch (error) {
+      console.error(error);
+       res.status(500).json({ error: "Something went wrong" });
+    }
+  });
   
 
 userRouter.get("/profile", async (req, res) => {
